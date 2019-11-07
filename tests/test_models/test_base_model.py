@@ -35,8 +35,8 @@ class TestBaseModel(unittest.TestCase):
         """ test dictionary repr of BaseModels """
         d = self.obj.to_dict()
         self.assertIsInstance(d, dict)
-        self.assertTrue(hasattr(d, self.obj.__class__.__name__))
-        self.assertTrue(hasattr(d, 'created_at'))
-        self.assertTrue(hasattr(d, 'updated_at'))
+        self.assertTrue('__class__' in d)
+        self.assertTrue('created_at' in d)
+        self.assertTrue('updated_at' in d)
         self.assertIsInstance(datetime.fromisoformat(d['created_at']), datetime)
         self.assertIsInstance(datetime.fromisoformat(d['updated_at']), datetime)
