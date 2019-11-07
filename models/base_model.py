@@ -12,8 +12,9 @@ class BaseModel():
                 if key == '__class__':
                     continue
                 setattr(self, key, value)
-            self.created_at = datetime.fromisoformat(self.created_at)
-            self.updated_at = datetime.fromisoformat(self.updated_at)
+            f = "%Y-%m-%dT%H:%M:%S.%f"
+            self.created_at = datetime.strptime(self.created_at, f)
+            self.updated_at = datetime.strptime(self.updated_at, f)
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
