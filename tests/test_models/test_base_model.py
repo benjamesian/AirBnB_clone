@@ -38,8 +38,9 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue('__class__' in d)
         self.assertTrue('created_at' in d)
         self.assertTrue('updated_at' in d)
-        self.assertIsInstance(datetime.fromisoformat(d['created_at']), datetime)
-        self.assertIsInstance(datetime.fromisoformat(d['updated_at']), datetime)
+        f = "%Y-%m-%dT%H:%M:%S.%f"
+        self.assertIsInstance(datetime.strptime(d['created_at'], f), datetime)
+        self.assertIsInstance(datetime.strptime(d['updated_at'], f), datetime)
 
     def test_init_kwargs(self):
         """ test updates to BaseModel using kwargs """
