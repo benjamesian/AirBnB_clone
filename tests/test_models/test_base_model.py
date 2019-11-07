@@ -40,3 +40,13 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue('updated_at' in d)
         self.assertIsInstance(datetime.fromisoformat(d['created_at']), datetime)
         self.assertIsInstance(datetime.fromisoformat(d['updated_at']), datetime)
+
+    def test_init_kwargs(self):
+        """ test updates to BaseModel using kwargs """
+        kwargs_obj = BaseModel()
+        dic = kwargs_obj.to_dict()
+        new = BaseModel(**dic)
+
+        self.assertEqual(new.id, kwargs_obj.id)
+        self.assertEqual(new.__class__.__name__, kwargs_obj.__class__.__name__)
+
