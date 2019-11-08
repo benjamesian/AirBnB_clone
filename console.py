@@ -15,7 +15,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_help(self, args):
         """ updated help """
-        pass
+        if (args == 'quit'):
+            print("Quit command to exit the program" + '\n')
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
