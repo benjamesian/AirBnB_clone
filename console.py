@@ -11,6 +11,7 @@ class HBNBCommand(cmd.Cmd):
         exit()
 
     def do_EOF(self, args):
+        """Exit program when receiving Ctrl+D\n"""
         print()
         exit()
 
