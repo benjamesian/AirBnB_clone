@@ -2,6 +2,12 @@
 import json
 from os import path
 from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 class FileStorage():
     """
@@ -17,7 +23,7 @@ class FileStorage():
 
     def new(self, obj):
         """ sets the instance: id pair in the dict __objects """
-        FileStorage.__objects[obj.__class__.__name__ + '.' + str(obj.id)] = obj
+        FileStorage.__objects[obj.__class__.__name__ + '.' + obj.id] = obj
 
     def save(self):
         """ serializes __objects to JSON file at __file_path """
@@ -30,4 +36,20 @@ class FileStorage():
         if (path.isfile(FileStorage.__file_path) == True):
             with open(FileStorage.__file_path) as fi:
                 d = json.load(fi)
-                FileStorage.__objects = {k: BaseModel(**v) for k, v in d.items()}
+                # FileStorage.__objects = {k: BaseModel(**v) for k, v in d.items()}
+                FileStorage.__objects = {}
+                for k, v in d.items():
+                    if k.startswith('BaseModel.'):
+                        FileStorage.__objects[k] = BaseModel(**v)
+                    elif k.startswith('User.'):
+                        FileStorage.__objects[k] = User(**v)
+                    elif k.startswith('Place.'):
+                        FileStorage.__objects[k] = Place(**v)
+                    elif k.startswith('State.'):
+                        FileStorage.__objects[k] = State(**v)
+                    elif k.startswith('City.'):
+                        FileStorage.__objects[k] = City(**v)
+                    elif k.startswith('Amenity.'):
+                        FileStorage.__objects[k] = Amenity(**v)
+                    elif k.startswith('Review.'):
+                        FileStorage.__objects[k] = Review(**v)

@@ -2,11 +2,19 @@
 import cmd
 import models
 from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """custom cmd for air_bnb"""
 
     prompt = "(hbnb) "
+
+    model_names = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place', 'Review']
 
     def do_quit(self, args):
         """Quit command to exit the program\n"""
@@ -21,12 +29,26 @@ class HBNBCommand(cmd.Cmd):
         """Create a BaseModel, save it to a file, and print it's id\n"""
         if not args:
             print('** class name missing **')
+            return
         elif args == 'BaseModel':
             b = BaseModel()
-            b.save()
-            print(b.id)
+        elif args == 'User':
+            b = User()
+        elif args == 'Review':
+            b = Review()
+        elif args == 'Place':
+            b = Place()
+        elif args == 'Amenity':
+            b = Amenity()
+        elif args == 'City':
+            b = City()
+        elif args == 'State':
+            b = State()
         else:
             print("** class doesn't exist **")
+            return
+        b.save()
+        print(b.id)
 
     def do_show(self, args):
         """Print string repr of an instance based on class name and id\n"""
@@ -34,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
             return
         args_arr = args.split(' ')
-        if args_arr[0] not in ['BaseModel']:
+        if args_arr[0] not in self.model_names:
             print("** class doesn't exist **")
         elif len(args_arr) == 1:
             print('** instance id missing **')
@@ -51,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
             return
         args_arr = args.split(' ')
-        if args_arr[0] not in ['BaseModel']:
+        if args_arr[0] not in self.model_names:
             print("** class doesn't exist **")
         elif len(args_arr) == 1:
             print('** instance id missing **')
@@ -69,7 +91,7 @@ class HBNBCommand(cmd.Cmd):
             for value in models.storage.all().values():
                 print(value)
         else:
-            if args not in ['BaseModel']:
+            if args not in self.model_names:
                 print("** class doesn't exist **")
             else:
                 for k, v in models.storage.all().items():
@@ -85,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             args_arr = args.split(' ')
             nargs = len(args_arr)
-            if args_arr[0] not in ['BaseModel']:
+            if args_arr[0] not in self.model_names:
                 print("** class doesn't exist **")
             elif nargs < 2:
                 print("** instance id missing **")
@@ -99,8 +121,11 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
             else:
                 model = models.storage.all()['.'.join(args_arr[:2])]
-                if args_arr[3].startswith('\"'):
-                    args_arr[3] = args_arr[3].strip('\"')
+                args_arr[3] = args_arr[3].strip('\"')
+                if args_arr[3].is_digit():
+                    args_arr[3] = int(args_arr[3])
+                elif args_arr[3].is_decimal():
+                    args_arr[3] = float(args_arr[3])
                 setattr(model, args_arr[2], args_arr[3])
 
 if __name__ == '__main__':
