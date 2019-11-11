@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Base class for all application objects"""
 from uuid import uuid4
 from datetime import datetime
 import models
@@ -13,6 +14,8 @@ class BaseModel():
         if kwargs:
             for key, value in kwargs.items():
                 if key == '__class__':
+                    # print('self class:', self.__class__)
+                    # print("Didn't set to:", value)
                     continue
                 setattr(self, key, value)
             f = "%Y-%m-%dT%H:%M:%S.%f"
