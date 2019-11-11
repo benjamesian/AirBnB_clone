@@ -8,7 +8,6 @@ from datetime import datetime
 class TestBaseModel(unittest.TestCase):
     """ For testing the BaseModel """
 
-
     def setUp(self):
         self.obj = BaseModel()
 
@@ -50,4 +49,3 @@ class TestBaseModel(unittest.TestCase):
 
         self.assertEqual(new.id, kwargs_obj.id)
         self.assertEqual(new.__class__.__name__, kwargs_obj.__class__.__name__)
-

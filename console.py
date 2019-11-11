@@ -12,14 +12,17 @@ from models.review import Review
 import re
 import ast
 
+
 class HBNBCommand(cmd.Cmd):
     """custom cmd for air_bnb"""
 
     prompt = "(hbnb) "
     cmdqueue = []
 
-    model_names = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place', 'Review']
+    model_names = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place',
+                   'Review']
     cmds = ['all', 'show', 'count', 'destroy', 'update']
+
     def precmd(self, line):
         """Pre command hook"""
         args_arr = line.split('.', maxsplit=1)
@@ -28,25 +31,33 @@ class HBNBCommand(cmd.Cmd):
             meth_arr = raw_method.split('(', maxsplit=1)
             if len(meth_arr) == 2:
                 method, raw_arguments = meth_arr
-                arguments = list(map(lambda x: x.strip(), raw_arguments.rstrip(')').split(',')))
+                arguments = list(map(
+                                    lambda x: x.strip(),
+                                    raw_arguments.rstrip(')').split(',')))
                 if model in self.model_names:
                     if method in self.cmds:
                         if len(arguments) > 1:
                             if arguments[1].startswith('{'):
-                                arguments = [arguments[0], ','.join(arguments[1:])]
+                                arguments = [
+                                    arguments[0],
+                                    ','.join(arguments[1:])]
                         # print('ARRGS', arguments)
-                        if method == 'update' and len(arguments) == 2: #wont happen bc ','s in dict
+                        if method == 'update' and len(arguments) == 2:
                             class_id, update_dict = arguments
                             try:
-                                # d = ast.literal_eval(re.search('({.+})', update_dict).group(0))
+                                # d = ast.literal_eval(re.search('({.+})',
+                                #                     update_dict).group(0))
                                 d = ast.literal_eval(update_dict)
                                 # print('loaded dict', d)
                                 for k, v in d.items():
-                                    self.cmdqueue.append(' '.join([method, model, class_id, k, str(v)]))
+                                    self.cmdqueue.append(' '.join([method,
+                                                                   model,
+                                                                   class_id,
+                                                                   k, str(v)]))
                                 # print('update iter', self.cmdqueue[0])
                                 return self.cmdqueue.pop(0)
-                            except:
-                                # print("couldn't load dictionary", update_dict)
+                            except ValueError:
+                                # print("couldn't load dictionary",update_dict)
                                 pass
                         else:
                             arguments = ' '.join(arguments)
@@ -182,6 +193,7 @@ class HBNBCommand(cmd.Cmd):
                 elif args_arr[3].isdecimal():
                     args_arr[3] = float(args_arr[3])
                 setattr(model, args_arr[2], args_arr[3])
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

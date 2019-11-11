@@ -7,6 +7,7 @@ import os
 from os import path
 import json
 
+
 class TestFileStorage(unittest.TestCase):
     def setUp(self):
         self.fs = FileStorage()
