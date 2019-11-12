@@ -28,7 +28,7 @@ class TestFileStorage(unittest.TestCase):
     def test_save(self):
         """Test save method."""
         self.fs.save()
-        filename = 'file.JSON'
+        filename = 'file.json'
         self.assertTrue(path.isfile(filename))
         with open(filename, 'r') as f:
             self.assertIsInstance(json.load(f), dict)
@@ -38,7 +38,7 @@ class TestFileStorage(unittest.TestCase):
         self.fs.reload()
         self.assertIsInstance(self.fs.all(), dict)
 
-        filename = 'file.JSON'
+        filename = 'file.json'
         if (path.isfile(filename)):
             with open(filename, 'r') as f:
                 with open('file_copy', 'w') as g:
