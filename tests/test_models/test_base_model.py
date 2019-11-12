@@ -32,7 +32,7 @@ class TestBaseModel(unittest.TestCase):
         other = BaseModel()
         self.assertNotEqual(self.obj.id, other.id)
 
-    def test_str(self):
+    def test__str__(self):
         """ test conversion to string of object """
         self.assertIsInstance(str(self.obj), str)
 
