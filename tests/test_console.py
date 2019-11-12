@@ -11,19 +11,23 @@ class TestConsole(unittest.TestCase):
     """ For testing the Console """
 
     def setUp(self):
+        """create test obj"""
         self.console = HBNBCommand()
 
     def test_quit(self):
+        """test quit functionality"""
         with self.assertRaises(SystemExit):
             self.console.onecmd('quit')
         with self.assertRaises(SystemExit):
             self.console.onecmd('quit more words')
 
     def test_EOF(self):
+        """test eof signal"""
         with self.assertRaises(SystemExit):
             self.console.onecmd('EOF')
 
     def test_create(self):
+        """test beneral"""
         with patch('sys.stdout', new=StringIO()) as f:
             self.console.onecmd('create')
             self.assertEqual(f.getvalue(), "** class name missing **\n")
