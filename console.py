@@ -32,30 +32,23 @@ class HBNBCommand(cmd.Cmd):
             if len(meth_arr) == 2:
                 method, raw_arguments = meth_arr
                 arguments = list(map(
-                                    lambda x: x.strip(),
-                                    raw_arguments.rstrip(')').split(',')))
+                    lambda x: x.strip(),
+                    raw_arguments.rstrip(')').split(',')))
                 if model in self.model_names:
                     if method in self.cmds:
-                        if len(arguments) > 1:
-                            if arguments[1].startswith('{'):
-                                arguments = [
-                                    arguments[0],
-                                    ','.join(arguments[1:])]
-                        # print('ARRGS', arguments)
+                        if len(arguments) > 1 and arguments[1].startswith('{'):
+                            arguments = [arguments[0], ','.join(arguments[1:])]
                         if method == 'update' and len(arguments) == 2:
                             class_id, update_dict = arguments
                             try:
                                 # d = ast.literal_eval(re.search('({.+})',
                                 #                     update_dict).group(0))
                                 d = ast.literal_eval(update_dict)
-                                # print('loaded dict', d)
                                 for k, v in d.items():
-                                    self.cmdqueue.append(' '.join([method,
-                                                                   model,
-                                                                   class_id,
-                                                                   k, str(v)]))
-                                # print('update iter', self.cmdqueue[0])
-                                return self.cmdqueue.pop(0)
+                                    self.cmdqueue.append(' '.join(
+                                        [method, class_id, k, str(v)]))
+                                if self.cmdqueue:
+                                    return self.cmdqueue.pop(0)
                             except ValueError:
                                 # print("couldn't load dictionary",update_dict)
                                 pass

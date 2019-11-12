@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""File Storage
+"""File storage.
 
-This module defined a class `FileStorage` that is capable of serializing
+This module defines a class `FileStorage` that is capable of serializing
 application objects and storing them in files for later retreival.
 
 """
@@ -18,7 +18,7 @@ from models.review import Review
 
 class FileStorage():
     """
-    serializes instances to a JSON file and deserializes JSON file to instances
+    Serializes instances to a JSON file and deserializes JSON file to instances.
     """
 
     __file_path = "file.JSON"
