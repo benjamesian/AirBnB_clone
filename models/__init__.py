@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Models
 
 Application objects are defined here as well as functions for manipulating and
