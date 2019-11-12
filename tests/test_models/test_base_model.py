@@ -49,3 +49,12 @@ class TestBaseModel(unittest.TestCase):
 
         self.assertEqual(new.id, kwargs_obj.id)
         self.assertEqual(new.__class__.__name__, kwargs_obj.__class__.__name__)
+
+    def test_save(self):
+        """ test save datetime obj """
+        sobj = BaseModel()
+        self.assertEqual(sobj.updated_at, sobj.created_at)
+
+        sobj.save()
+        self.assertEqual(type(sobj.updated_at), datetime)
+        self.assertNotEqual(sobj.updated_at, sobj.created_at)
