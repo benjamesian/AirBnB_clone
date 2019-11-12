@@ -44,13 +44,15 @@ class HBNBCommand(cmd.Cmd):
                                 d = ast.literal_eval(update_dict)
                                 for k, v in d.items():
                                     self.cmdqueue.append(' '.join(
-                                        [method, model, class_id.strip('"'), k, str(v)]))
+                                        [method, model, class_id.strip('"'), k,
+                                         str(v)]))
                                 if self.cmdqueue:
                                     return self.cmdqueue.pop(0)
                             except ValueError:
                                 pass
                         else:
-                            arguments = ' '.join(map(lambda x: x.strip('"'), arguments))
+                            arguments = ' '.join(map(lambda x: x.strip('"'),
+                                                     arguments))
                             line = method + ' ' + model + ' ' + arguments
         return line
 
