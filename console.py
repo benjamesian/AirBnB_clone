@@ -10,7 +10,6 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
-import re
 import ast
 
 
@@ -42,18 +41,16 @@ class HBNBCommand(cmd.Cmd):
                         if method == 'update' and len(arguments) == 2:
                             class_id, update_dict = arguments
                             try:
-                                # d = ast.literal_eval(re.search('({.+})',
-                                #                     update_dict).group(0))
                                 d = ast.literal_eval(update_dict)
                                 for k, v in d.items():
                                     self.cmdqueue.append(' '.join(
-                                        [method, class_id, k, str(v)]))
+                                        [method, model, class_id.strip('"'), k, str(v)]))
                                 if self.cmdqueue:
                                     return self.cmdqueue.pop(0)
                             except ValueError:
                                 pass
                         else:
-                            arguments = ' '.join(arguments)
+                            arguments = ' '.join(map(lambda x: x.strip('"'), arguments))
                             line = method + ' ' + model + ' ' + arguments
         return line
 
@@ -122,7 +119,7 @@ class HBNBCommand(cmd.Cmd):
             for k in models.storage.all().keys():
                 if k.startswith(args + '.'):
                     count += 1
-        return count
+        print(count)
 
     def do_destroy(self, args):
         """Delete and instance based on class name and id\n"""
