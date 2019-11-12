@@ -17,7 +17,13 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(hasattr(self.obj, 'id'))
         self.assertTrue(hasattr(self.obj, 'created_at'))
         self.assertTrue(hasattr(self.obj, 'updated_at'))
+
+    def test_id(self):
+        """test id type"""
         self.assertIsInstance(self.obj.id, str)
+
+    def test_datetime(self):
+        """test if timestamps are datetimes"""
         self.assertIsInstance(self.obj.created_at, datetime)
         self.assertIsInstance(self.obj.updated_at, datetime)
 
