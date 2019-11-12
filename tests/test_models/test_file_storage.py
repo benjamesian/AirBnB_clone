@@ -9,19 +9,24 @@ import json
 
 
 class TestFileStorage(unittest.TestCase):
+    """Class for testing FileStorage objects"""
     def setUp(self):
+        """Create FileStorage object."""
         self.fs = FileStorage()
 
     def test_all(self):
+        """Test all method."""
         self.assertIsInstance(self.fs.all(), dict)
 
     def test_new(self):
+        """Test new method."""
         b = BaseModel()
         self.fs.new(b)
         key = b.__class__.__name__ + '.' + str(b.id)
         self.assertIsInstance(self.fs.all()[key], BaseModel)
 
     def test_save(self):
+        """Test save method."""
         self.fs.save()
         filename = 'file.JSON'
         self.assertTrue(path.isfile(filename))
@@ -29,6 +34,7 @@ class TestFileStorage(unittest.TestCase):
             self.assertIsInstance(json.load(f), dict)
 
     def test_reload(self):
+        """Test reload method."""
         self.fs.reload()
         self.assertIsInstance(self.fs.all(), dict)
 
