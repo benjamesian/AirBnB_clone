@@ -51,17 +51,14 @@ class HBNBCommand(cmd.Cmd):
                                 if self.cmdqueue:
                                     return self.cmdqueue.pop(0)
                             except ValueError:
-                                # print("couldn't load dictionary",update_dict)
                                 pass
                         else:
                             arguments = ' '.join(arguments)
                             line = method + ' ' + model + ' ' + arguments
-                        # print('custom line:', line)
-        # print('queue:', self.cmdqueue)
         return line
 
-    # def postcmd(self, stop, line):
-    #     print('stop:', stop, 'line:', line)
+    def emptyline(self):
+        pass
 
     def do_quit(self, args):
         """Quit command to exit the program\n"""
