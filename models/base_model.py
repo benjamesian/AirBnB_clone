@@ -11,6 +11,7 @@ class BaseModel():
     """
 
     def __init__(self, *args, **kwargs):
+        """initialization"""
         if kwargs:
             for key, value in kwargs.items():
                 if key == '__class__':
@@ -27,6 +28,7 @@ class BaseModel():
             models.storage.new(self)
 
     def __str__(self):
+        """custom str"""
         return "[{:s}] ({:s}) {:s}"\
             .format(self.__class__.__name__, self.id, str(self.__dict__))
 
