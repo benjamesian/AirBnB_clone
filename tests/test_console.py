@@ -57,12 +57,6 @@ class TestConsole(unittest.TestCase):
             self.console.onecmd('all FakeModel')
             self.assertEqual(f.getvalue(), "** class doesn't exist **\n")
 
-    # def test_model_all(self):
-    #     """test Model.all()"""
-    #     with patch('sys.stderr', new=StringIO()) as f:
-    #         self.console.onecmd('FakeModel.all()')
-    #         self.assertEqual(f.getvalue(), "*** Unknown syntax: FakeModel.all()\n")
-
     def test_update(self):
         """test the update command"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -84,8 +78,11 @@ class TestConsole(unittest.TestCase):
             self.console.onecmd("create BaseModel")
             instance_id = f.getvalue().rstrip('\n')
             with patch('sys.stdout', new=StringIO()) as g:
-                self.console.onecmd('update BaseModel {:s}'.format(instance_id))
-                self.assertEqual(g.getvalue(), "** attribute name missing **\n")
+                self.console.onecmd(
+                    'update BaseModel {:s}'.format(instance_id))
+                self.assertEqual(
+                    g.getvalue(), "** attribute name missing **\n")
             with patch('sys.stdout', new=StringIO()) as g:
-                self.console.onecmd('update BaseModel {:s} hi'.format(instance_id))
+                self.console.onecmd(
+                    'update BaseModel {:s} hi'.format(instance_id))
                 self.assertEqual(g.getvalue(), "** value missing **\n")

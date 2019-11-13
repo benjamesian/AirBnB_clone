@@ -43,7 +43,8 @@ class TestBaseModel(unittest.TestCase):
     def test__str__(self):
         """test conversion to string of object"""
         s = "[{:s}] ({:s}) {:s}"\
-            .format(self.obj.__class__.__name__, self.obj.id, str(self.obj.__dict__))
+            .format(self.obj.__class__.__name__,
+                    self.obj.id, str(self.obj.__dict__))
         self.assertEqual(str(self.obj), s)
 
     def test_to_dict(self):
