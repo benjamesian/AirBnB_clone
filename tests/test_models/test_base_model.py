@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-Testing Base Class
+Testing BaseModel
 """
 
 import unittest
@@ -9,17 +9,20 @@ from models.base_model import BaseModel
 from datetime import datetime
 
 class TestBaseModel(unittest.TestCase):
-    """ For testing the BaseModel """
+    """Class testing the BaseModel """
 
     def setUp(self):
         self.obj = BaseModel()
 
     def test_init(self):
-        """ Test that attributes are initialized """
+        """Test that attributes are initialized"""
         self.assertIsInstance(self.obj, BaseModel)
         self.assertTrue(hasattr(self.obj, 'id'))
         self.assertTrue(hasattr(self.obj, 'created_at'))
         self.assertTrue(hasattr(self.obj, 'updated_at'))
+
+    def test_instance(self):
+        self.b = BaseModel()
 
     def test_id(self):
         """test id type"""
