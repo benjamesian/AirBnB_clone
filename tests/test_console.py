@@ -62,7 +62,7 @@ class TestConsole(unittest.TestCase):
     #     with patch('sys.stderr', new=StringIO()) as f:
     #         self.console.onecmd('FakeModel.all()')
     #         self.assertEqual(f.getvalue(), "*** Unknown syntax: FakeModel.all()\n")
-        
+
     def test_update(self):
         """test the update command"""
         with patch('sys.stdout', new=StringIO()) as f:

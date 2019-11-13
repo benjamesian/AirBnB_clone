@@ -1,6 +1,7 @@
 import unittest
 from models.place import Place
 
+
 class TestState(unittest.TestCase):
     """testing inherited functionality from BaseModel"""
 

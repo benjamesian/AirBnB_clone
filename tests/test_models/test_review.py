@@ -1,6 +1,7 @@
 import unittest
 from models.review import Review
 
+
 class TestState(unittest.TestCase):
     """testing inherited functionality from BaseModel"""
 
