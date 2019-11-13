@@ -9,6 +9,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from datetime import datetime
 
 import ast
 
@@ -144,15 +145,15 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """Print string repr of instances\n"""
         if not args:
-            for value in models.storage.all().values():
-                print(value)
+            print(list(map(lambda x: str(x), models.storage.all().values())))
         else:
             if args not in self.model_names:
                 print("** class doesn't exist **")
             else:
-                for k, v in models.storage.all().items():
-                    if k.startswith(args + '.'):
-                        print(v)
+                print(list(map(
+                    lambda item: str(item[1]),
+                    filter(lambda item: item[0].startswith(args + '.'),
+                           models.storage.all().items()))))
 
     def do_update(self, args):
         """Update an instance based on class name and id\n
@@ -183,6 +184,7 @@ class HBNBCommand(cmd.Cmd):
                 elif args_arr[3].isdecimal():
                     args_arr[3] = float(args_arr[3])
                 setattr(model, args_arr[2], args_arr[3])
+                model['updated_at'] = datetime.now()
 
 
 if __name__ == '__main__':
