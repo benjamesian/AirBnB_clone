@@ -6,10 +6,12 @@ from models.base_model import BaseModel
 import os
 from os import path
 import json
+import pep8
 
 
 class TestFileStorage(unittest.TestCase):
     """Class for testing FileStorage objects"""
+
     def setUp(self):
         """Create FileStorage object."""
         self.fs = FileStorage()
@@ -57,3 +59,9 @@ class TestFileStorage(unittest.TestCase):
                 self.fs.reload()
             except Exception as e:
                 self.fail('reload raised exception when no file: {}'.format(e))
+
+    def test_pep8_conformance(self):
+        """test for pep8 conformance"""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/engine/file_storage.py'])
+        self.assertEqual(result.total_errors, 0, "Found pep8 errors")

@@ -8,12 +8,14 @@ import unittest
 from models.base_model import BaseModel
 from datetime import datetime
 import re
+import pep8
 
 
 class TestBaseModel(unittest.TestCase):
     """Class testing the BaseModel """
 
     def setUp(self):
+        """do setup before testing"""
         self.obj = BaseModel()
 
     def test_init(self):
@@ -22,9 +24,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(hasattr(self.obj, 'id'))
         self.assertTrue(hasattr(self.obj, 'created_at'))
         self.assertTrue(hasattr(self.obj, 'updated_at'))
-
-    def test_instance(self):
-        self.b = BaseModel()
 
     def test_id(self):
         """test id type"""
@@ -75,3 +74,9 @@ class TestBaseModel(unittest.TestCase):
         sobj.save()
         self.assertEqual(type(sobj.updated_at), datetime)
         self.assertNotEqual(sobj.updated_at, sobj.created_at)
+
+    def test_pep8_conformance(self):
+        """test for pep8 conformance"""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/base_model.py'])
+        self.assertEqual(result.total_errors, 0, "Found pep8 errors")
