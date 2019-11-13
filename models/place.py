@@ -6,8 +6,8 @@ from models.base_model import BaseModel
 class Place(BaseModel):
     """Place class from BaseModel"""
 
-    city_id = ''    # it will be the City.id
-    user_id = ''    # it will be the User.id
+    city_id = ''
+    user_id = ''
     name = ''
     description = ''
     number_rooms = 0
@@ -16,4 +16,4 @@ class Place(BaseModel):
     price_by_night = 0
     latitude = 0.0
     longitude = 0.0
-    amenity_ids = []    # it will be the list of Amenity.id later
+    amenity_ids = []
