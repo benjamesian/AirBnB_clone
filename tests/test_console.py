@@ -40,3 +40,52 @@ class TestConsole(unittest.TestCase):
                 '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
             )
             self.assertRegex(f.getvalue(), reg)
+
+    def test_empty(self):
+        """test empty string submission"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd('')
+            self.assertEqual(f.getvalue(), "")
+        self.console.onecmd('all')
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd('')
+            self.assertEqual(f.getvalue(), "")
+
+    def test_all(self):
+        """test the all command"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd('all FakeModel')
+            self.assertEqual(f.getvalue(), "** class doesn't exist **\n")
+
+    # def test_model_all(self):
+    #     """test Model.all()"""
+    #     with patch('sys.stderr', new=StringIO()) as f:
+    #         self.console.onecmd('FakeModel.all()')
+    #         self.assertEqual(f.getvalue(), "*** Unknown syntax: FakeModel.all()\n")
+        
+    def test_update(self):
+        """test the update command"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd('update')
+            self.assertEqual(f.getvalue(), "** class name missing **\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd('update FakeModel')
+            self.assertEqual(f.getvalue(), "** class doesn't exist **\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd('update FakeModel')
+            self.assertEqual(f.getvalue(), "** class doesn't exist **\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd('update BaseModel')
+            self.assertEqual(f.getvalue(), "** instance id missing **\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd('update BaseModel FakeId')
+            self.assertEqual(f.getvalue(), "** no instance found **\n")
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("create BaseModel")
+            instance_id = f.getvalue().rstrip('\n')
+            with patch('sys.stdout', new=StringIO()) as g:
+                self.console.onecmd('update BaseModel {:s}'.format(instance_id))
+                self.assertEqual(g.getvalue(), "** attribute name missing **\n")
+            with patch('sys.stdout', new=StringIO()) as g:
+                self.console.onecmd('update BaseModel {:s} hi'.format(instance_id))
+                self.assertEqual(g.getvalue(), "** value missing **\n")
