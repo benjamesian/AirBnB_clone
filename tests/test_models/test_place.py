@@ -1,12 +1,12 @@
 import unittest
-from models.city import City
+from models.place import Place
 
 class TestState(unittest.TestCase):
     """testing inherited functionality from BaseModel"""
 
     def setUp(self):
         """test obj instantiation"""
-        self.obj = City()
+        self.obj = Place()
 
     def test_Attrs(self):
         """checks the existence of expected attrs"""
