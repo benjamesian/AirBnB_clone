@@ -40,7 +40,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test__str__(self):
         """ test conversion to string of object """
-        self.assertIsInstance(str(self.obj), str)
+        self.assertEqual(type(str(self.obj)), str)
 
     def test_to_dict(self):
         """ test dictionary repr of BaseModels """
