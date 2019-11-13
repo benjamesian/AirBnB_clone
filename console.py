@@ -185,7 +185,7 @@ class HBNBCommand(cmd.Cmd):
                 elif args_arr[3].isdecimal():
                     args_arr[3] = float(args_arr[3])
                 setattr(model, args_arr[2], args_arr[3])
-                model['updated_at'] = datetime.now()
+                # model['updated_at'] = datetime.now()
 
 
 if __name__ == '__main__':
