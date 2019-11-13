@@ -57,6 +57,7 @@ class HBNBCommand(cmd.Cmd):
         return line
 
     def emptyline(self):
+        """newlines when empty line is given"""
         pass
 
     def do_quit(self, args):
