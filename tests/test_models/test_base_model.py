@@ -35,16 +35,16 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(self.obj.updated_at, datetime)
 
     def test_uuid(self):
-        """ Test that ids are unique """
+        """Test that ids are unique"""
         other = BaseModel()
         self.assertNotEqual(self.obj.id, other.id)
 
     def test__str__(self):
-        """ test conversion to string of object """
-        self.assertEqual(type(str(self.obj)), str)
+        """test conversion to string of object"""
+        self.assertIsInstance(str(self.obj), str)
 
     def test_to_dict(self):
-        """ test dictionary repr of BaseModels """
+        """test dictionary repr of BaseModels"""
         d = self.obj.to_dict()
         self.assertIsInstance(d, dict)
         self.assertTrue('__class__' in d)
