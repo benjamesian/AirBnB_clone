@@ -7,6 +7,7 @@ Testing BaseModel
 import unittest
 from models.base_model import BaseModel
 from datetime import datetime
+import re
 
 
 class TestBaseModel(unittest.TestCase):
@@ -41,7 +42,9 @@ class TestBaseModel(unittest.TestCase):
 
     def test__str__(self):
         """test conversion to string of object"""
-        self.assertIsInstance(str(self.obj), str)
+        s = "[{:s}] ({:s}) {:s}"\
+            .format(self.obj.__class__.__name__, self.obj.id, str(self.obj.__dict__))
+        self.assertEqual(str(self.obj), s)
 
     def test_to_dict(self):
         """test dictionary repr of BaseModels"""
