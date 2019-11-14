@@ -1,7 +1,7 @@
 # AirBnB clone
 This project completed at Holberton school replicates the AirBnB webapp.
-![airbnb picture](https://imgur.com/a/2JYWv3L)
-
+<p align="center">
+   <img src="https://i.imgur.com/JOhaZ5m.png"></p>
 # Current Features
 
 ### Air_BnBClone/models
