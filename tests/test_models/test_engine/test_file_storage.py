@@ -20,6 +20,10 @@ class TestFileStorage(unittest.TestCase):
         """checks if file exists"""
         self.assertTrue(isinstance(self.fs._FileStorage__file_path, str))
 
+    def test_objects(self):
+        """testing if __objects exists"""
+        self.assertTrue(isinstance(self.fs._FileStorage__objects, dict))
+
     def test_all(self):
         """Test all method."""
         self.assertIsInstance(self.fs.all(), dict)
@@ -33,11 +37,14 @@ class TestFileStorage(unittest.TestCase):
 
     def test_save(self):
         """Test save method."""
+        c = BaseModel()
+        key = c.__class__.__name__ + '.' + str(c.id)
         self.fs.save()
         filename = 'file.json'
         self.assertTrue(path.isfile(filename))
         with open(filename, 'r') as f:
-            self.assertIsInstance(json.load(f), dict)
+            dic = json.load(f)
+        self.assertIn(key, dic.keys())
 
     def test_reload(self):
         """Test reload method."""
