@@ -3,7 +3,8 @@ This project completed at Holberton school replicates the AirBnB webapp.
 <p align="center">
    <img src="https://i.imgur.com/JOhaZ5m.png"></p>
 # Current Features
-
+<p align="center">
+   <img src="https://imgur.com/a/2JYWv3L"></p>
 ### Air_BnBClone/models
 
 *module containing class files*
