@@ -1,5 +1,6 @@
 import unittest
 from models.amenity import Amenity
+import pep8
 
 
 class TestAmenity(unittest.TestCase):
@@ -12,3 +13,9 @@ class TestAmenity(unittest.TestCase):
     def test_Attrs(self):
         """checks the existence of expected attrs"""
         self.assertTrue(hasattr(self.obj, 'name'))
+
+    def test_pep8_conformance(self):
+        """test for pep8 conformance"""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/amenity.py'])
+        self.assertEqual(result.total_errors, 0, "Found pep8 errors")

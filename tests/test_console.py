@@ -5,6 +5,7 @@ from unittest.mock import patch
 from console import HBNBCommand
 from io import StringIO
 import re
+import pep8
 
 
 class TestConsole(unittest.TestCase):
@@ -86,3 +87,9 @@ class TestConsole(unittest.TestCase):
                 self.console.onecmd(
                     'update BaseModel {:s} hi'.format(instance_id))
                 self.assertEqual(g.getvalue(), "** value missing **\n")
+
+    def test_pep8_conformance(self):
+        """test for pep8 conformance"""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['console.py'])
+        self.assertEqual(result.total_errors, 0, "Found pep8 errors")

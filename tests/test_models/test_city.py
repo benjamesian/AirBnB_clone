@@ -1,5 +1,6 @@
 import unittest
 from models.city import City
+import pep8
 
 
 class TestState(unittest.TestCase):
@@ -13,3 +14,9 @@ class TestState(unittest.TestCase):
         """checks the existence of expected attrs"""
         self.assertTrue(hasattr(self.obj, 'state_id'))
         self.assertTrue(hasattr(self.obj, 'name'))
+
+    def test_pep8_conformance(self):
+        """test for pep8 conformance"""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/city.py'])
+        self.assertEqual(result.total_errors, 0, "Found pep8 errors")
