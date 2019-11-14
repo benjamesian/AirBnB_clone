@@ -47,6 +47,31 @@ $ (hbnb) show BaseModel c3440b3c-f917-446d-9d4f-781d790e784a
 [BaseModel] (c3440b3c-f917-446d-9d4f-781d790e784a) {'id': 'c3440b3c-f917-446d-9d4f-781d790e784a', 'created_at': datetime.datetime(2019, 11, 14, 5, 59, 26, 586378), 'updated_at': datetime.datetime(2019, 11, 14, 5, 59, 26, 586392)}
 $ (HBNB) quit
 ```
+
+##### Console commands description and usage
+
+ - __all__ [ModelName] (show all instances stored, optionally filtered by class)
+ - __count__ ModelName (count number of instances of a model are stored)
+ - __show__ ModelName InstanceId (show the JSON representation of a stored model instance)
+ - __destroy__ ModelName InstanceId (delete a model instance from storage)
+ - __update__ ModelName InstanceId AttributeName AttributeValue (update an attribute on a stored instance)
+
+
+### Calling methods by model name
+```sh
+$ ./console.py
+$ (hbnb) create BaseModel
+$ c3440b3c-f917-446d-9d4f-781d790e784a
+$ (hbnb) BaseModel.show("c3440b3c-f917-446d-9d4f-781d790e784a")
+[BaseModel] (c3440b3c-f917-446d-9d4f-781d790e784a) {'id': 'c3440b3c-f917-446d-9d4f-781d790e784a', 'created_at': datetime.datetime(2019, 11, 14, 5, 59, 26, 586378), 'updated_at': datetime.datetime(2019, 11, 14, 5, 59, 26, 586392)}
+$ (hbnb) BaseModel.update("c3440b3c-f917-446d-9d4f-781d790e784a", "z", 4)
+$ (hbnb) BaseModel.show("c3440b3c-f917-446d-9d4f-781d790e784a")
+[BaseModel] (c3440b3c-f917-446d-9d4f-781d790e784a) {'id': 'c3440b3c-f917-446d-9d4f-781d790e784a', 'created_at': datetime.datetime(2019, 11, 14, 5, 59, 26, 586378), 'updated_at': datetime.datetime(2019, 11, 14, 5, 59, 26, 586392), 'z': 4}
+$ (hbnb) BaseModel.destroy("c3440b3c-f917-446d-9d4f-781d790e784a")
+$ (hbnb) BaseModel.show("c3440b3c-f917-446d-9d4f-781d790e784a")
+** no instance found **
+$ (hbnb) quit
+```
 ### Unit testing
 *in AirBnB_clone/ directory, enter the following command to run our unit tests...*
 ```sh
