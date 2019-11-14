@@ -16,6 +16,10 @@ class TestFileStorage(unittest.TestCase):
         """Create FileStorage object."""
         self.fs = FileStorage()
 
+    def test_file(self):
+        """checks if file exists"""
+        self.assertTrue(isinstance(self.fs._FileStorage__file_path, str))
+
     def test_all(self):
         """Test all method."""
         self.assertIsInstance(self.fs.all(), dict)
@@ -25,7 +29,7 @@ class TestFileStorage(unittest.TestCase):
         b = BaseModel()
         self.fs.new(b)
         key = b.__class__.__name__ + '.' + str(b.id)
-        self.assertIsInstance(self.fs.all()[key], BaseModel)
+        self.assertIn(key, self.fs.all())
 
     def test_save(self):
         """Test save method."""
