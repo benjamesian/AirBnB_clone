@@ -86,22 +86,22 @@
     background: url(../images/icon_bath.png) center no-repeat;
 }
 
-.amenities, .reviews {
+.place-amenities, .reviews {
     margin-top: 40px;
 }
 
-.reviews h2, .amenities h2 {
+.reviews h2, .place-amenities h2 {
     font-size: 16px;
     border-bottom: 1px solid #DDDDDD;
     padding-bottom: 10px;
 }
 
-.amenities ul, .reviews ul {
+.place-amenities ul, .reviews ul {
     list-style: none;
     padding-left: 0;
 }
 
-.amenities li {
+.place-amenities li {
     margin-bottom: 10px;
 }
 
